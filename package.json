@@ -6,14 +6,26 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "turbo format",
-    "typecheck": "turbo typecheck"
+    "lint:fix": "turbo lint:fix",
+    "fmt": "turbo fmt",
+    "fmt:check": "turbo fmt:check",
+    "typecheck": "turbo typecheck",
+    "check": "bun run fmt:check && turbo lint && turbo typecheck",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "prettier": "^3.8.1",
-    "prettier-plugin-tailwindcss": "^0.7.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "oxfmt": "^0.42.0",
+    "oxlint": "^1.57.0",
     "turbo": "^2.8.17",
     "typescript": "5.9.3"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "oxfmt",
+      "oxlint --fix"
+    ]
   },
   "packageManager": "bun@1.3.11",
   "engines": {

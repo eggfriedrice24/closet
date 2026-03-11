@@ -28,3 +28,9 @@ npm-debug.log*
 # Misc
 .DS_Store
 *.pem
+
+# Expo
+.expo/
+
+# Build artifacts
+*.tsbuildinfo
