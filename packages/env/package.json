@@ -1,18 +1,18 @@
 {
   "name": "@workspace/env",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
+  "type": "module",
+  "exports": {
+    "./server": "./src/server.ts",
+    "./client": "./src/client.ts"
+  },
   "scripts": {
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "fmt": "oxfmt .",
     "fmt:check": "oxfmt --check .",
     "typecheck": "tsc --noEmit"
-  },
-  "exports": {
-    "./server": "./src/server.ts",
-    "./client": "./src/client.ts"
   },
   "dependencies": {
     "@t3-oss/env-core": "^0.13.11",
