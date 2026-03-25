@@ -1,6 +1,8 @@
+import { useForm } from "@tanstack/react-form";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { signIn, signUp } from "@workspace/api-client";
 import { env } from "@workspace/env/client";
+import { registerSchema } from "@workspace/shared";
 import { Button } from "@workspace/ui/components/button";
 import { Card, CardContent } from "@workspace/ui/components/card";
 import {
@@ -19,27 +21,25 @@ export const Route = createFileRoute("/register")({
 
 function RegisterPage() {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
+  const form = useForm({
+    defaultValues: { name: "", email: "", password: "" },
+    validators: {
+      onSubmit: registerSchema,
+    },
+    onSubmit: async ({ value }) => {
+      setServerError("");
+      const result = await signUp.email(value);
 
-    const result = await signUp.email({ name, email, password });
+      if (result.error) {
+        setServerError(result.error.message ?? "Registration failed");
+        return;
+      }
 
-    if (result.error) {
-      setError(result.error.message ?? "Registration failed");
-      setLoading(false);
-      return;
-    }
-
-    navigate({ to: "/" });
-  }
+      navigate({ to: "/" });
+    },
+  });
 
   async function handleGoogleSignIn() {
     await signIn.social({ provider: "google", callbackURL: `${env.VITE_APP_URL}/` });
@@ -50,7 +50,13 @@ function RegisterPage() {
       <div className="flex w-full max-w-sm flex-col gap-6 md:max-w-3xl">
         <Card className="overflow-hidden p-0">
           <CardContent className="grid p-0 md:grid-cols-2">
-            <form onSubmit={handleSubmit} className="p-6 md:p-8">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                form.handleSubmit();
+              }}
+              className="p-6 md:p-8"
+            >
               <FieldGroup>
                 <div className="flex flex-col items-center gap-2 text-center">
                   <h1 className="text-2xl font-bold">Create your account</h1>
@@ -58,44 +64,75 @@ function RegisterPage() {
                     Get started with Closet Command
                   </p>
                 </div>
+                <form.Field name="name">
+                  {(field) => (
+                    <Field data-invalid={field.state.meta.errors.length > 0 || undefined}>
+                      <FieldLabel htmlFor="name">Name</FieldLabel>
+                      <Input
+                        id="name"
+                        type="text"
+                        placeholder="Your name"
+                        value={field.state.value}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        onBlur={field.handleBlur}
+                        aria-invalid={field.state.meta.errors.length > 0 || undefined}
+                      />
+                      {field.state.meta.errors.map((error) => (
+                        <FieldDescription key={String(error)}>{String(error)}</FieldDescription>
+                      ))}
+                    </Field>
+                  )}
+                </form.Field>
+                <form.Field name="email">
+                  {(field) => (
+                    <Field data-invalid={field.state.meta.errors.length > 0 || undefined}>
+                      <FieldLabel htmlFor="email">Email</FieldLabel>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        value={field.state.value}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        onBlur={field.handleBlur}
+                        aria-invalid={field.state.meta.errors.length > 0 || undefined}
+                      />
+                      {field.state.meta.errors.map((error) => (
+                        <FieldDescription key={String(error)}>{String(error)}</FieldDescription>
+                      ))}
+                    </Field>
+                  )}
+                </form.Field>
+                <form.Field name="password">
+                  {(field) => (
+                    <Field data-invalid={field.state.meta.errors.length > 0 || undefined}>
+                      <FieldLabel htmlFor="password">Password</FieldLabel>
+                      <Input
+                        id="password"
+                        type="password"
+                        value={field.state.value}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        onBlur={field.handleBlur}
+                        aria-invalid={field.state.meta.errors.length > 0 || undefined}
+                      />
+                      {field.state.meta.errors.length > 0 ? (
+                        field.state.meta.errors.map((error) => (
+                          <FieldDescription key={String(error)}>{String(error)}</FieldDescription>
+                        ))
+                      ) : (
+                        <FieldDescription>Must be at least 8 characters long.</FieldDescription>
+                      )}
+                    </Field>
+                  )}
+                </form.Field>
+                {serverError && <p className="text-destructive text-sm">{serverError}</p>}
                 <Field>
-                  <FieldLabel htmlFor="name">Name</FieldLabel>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="email">Email</FieldLabel>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <Input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                  <FieldDescription>Must be at least 8 characters long.</FieldDescription>
-                </Field>
-                {error && <p className="text-destructive text-sm">{error}</p>}
-                <Field>
-                  <Button type="submit" disabled={loading}>
-                    {loading ? "Creating account..." : "Create Account"}
-                  </Button>
+                  <form.Subscribe selector={(state) => state.isSubmitting}>
+                    {(isSubmitting) => (
+                      <Button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? "Creating account..." : "Create Account"}
+                      </Button>
+                    )}
+                  </form.Subscribe>
                 </Field>
                 <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                   Or continue with
