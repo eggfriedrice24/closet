@@ -2,7 +2,16 @@ import { createMiddleware } from "hono/factory";
 
 import { auth } from "../auth";
 
-export const requireAuth = createMiddleware(async (c, next) => {
+type AuthSession = typeof auth.$Infer.Session;
+
+export type AuthEnv = {
+  Variables: {
+    user: AuthSession["user"];
+    session: AuthSession["session"];
+  };
+};
+
+export const requireAuth = createMiddleware<AuthEnv>(async (c, next) => {
   const session = await auth.api.getSession({ headers: c.req.raw.headers });
 
   if (!session) {
