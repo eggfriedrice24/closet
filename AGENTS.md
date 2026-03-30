@@ -2,7 +2,7 @@
 
 ## Product
 
-**Closet Command** is an AI-powered wardrobe assistant. Users upload photos of their clothing, and AI suggests daily outfits based on current fashion trends, celebrity looks, and what they already own.
+**Closet** is an AI-powered wardrobe assistant. Users upload photos of their clothing, and AI suggests daily outfits based on current fashion trends, celebrity looks, and what they already own.
 
 ## Stack
 

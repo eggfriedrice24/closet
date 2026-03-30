@@ -20,7 +20,7 @@ app.on(["POST", "GET"], "/api/auth/**", (c) => {
 });
 
 app.get("/", (c) => {
-  return c.json({ message: "Closet Command API" });
+  return c.json({ message: "Closet API" });
 });
 
 const port = 3001;

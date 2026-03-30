@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:17-alpine
-    container_name: closet-command-db
+    container_name: closet-db
     restart: unless-stopped
     ports:
       - "5434:5432"

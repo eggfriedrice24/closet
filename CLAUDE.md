@@ -1,4 +1,4 @@
-# Closet Command - AI Wardrobe Assistant
+# Closet - AI Wardrobe Assistant
 
 ## Project Overview
 

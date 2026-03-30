@@ -1,4 +1,4 @@
-# Closet Command
+# Closet
 
 AI-powered wardrobe assistant. Upload your closet, get daily outfit suggestions based on current fashion trends, celebrity looks, and what you already own.
 

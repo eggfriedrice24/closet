@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in contributing to Closet Command!
+Thanks for your interest in contributing to Closet!
 
 ## Prerequisites
 

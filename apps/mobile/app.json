@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Closet Command",
-    "slug": "closet-command",
+    "name": "Closet",
+    "slug": "closet",
     "version": "0.0.1",
     "orientation": "portrait",
-    "scheme": "closet-command",
+    "scheme": "closet",
     "platforms": ["ios", "android"]
   }
 }
