@@ -56,52 +56,55 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
       <FieldGroup>
         <div className="flex flex-col items-center gap-2 text-center">
           <h1 className="text-2xl font-bold">Create your account</h1>
-          <p className="text-muted-foreground text-sm text-balance">
-            Get started with Closet Command
-          </p>
+          <p className="text-muted-foreground text-sm text-balance">Get started with Closet</p>
         </div>
-        <form.Field name="name">
-          {(field) => (
-            <Field data-invalid={field.state.meta.errors.length > 0 || undefined}>
-              <FieldLabel htmlFor="name">Name</FieldLabel>
-              <Input
-                id="name"
-                type="text"
-                placeholder="Your name"
-                value={field.state.value}
-                onChange={(e) => field.handleChange(e.target.value)}
-                onBlur={field.handleBlur}
-                aria-invalid={field.state.meta.errors.length > 0 || undefined}
-              />
-              {field.state.meta.errors.map((error) => (
-                <FieldDescription key={String(error)}>{String(error)}</FieldDescription>
-              ))}
-            </Field>
-          )}
-        </form.Field>
-        <form.Field name="email">
-          {(field) => (
-            <Field data-invalid={field.state.meta.errors.length > 0 || undefined}>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={field.state.value}
-                onChange={(e) => field.handleChange(e.target.value)}
-                onBlur={field.handleBlur}
-                aria-invalid={field.state.meta.errors.length > 0 || undefined}
-              />
-              {field.state.meta.errors.map((error) => (
-                <FieldDescription key={String(error)}>{String(error)}</FieldDescription>
-              ))}
-            </Field>
-          )}
-        </form.Field>
+        <div className="grid grid-cols-2 gap-4">
+          <form.Field name="name">
+            {(field) => (
+              <Field data-invalid={field.state.meta.errors.length > 0 || undefined}>
+                <FieldLabel htmlFor="name">Name</FieldLabel>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Your name"
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  onBlur={field.handleBlur}
+                  aria-invalid={field.state.meta.errors.length > 0 || undefined}
+                />
+                {field.state.meta.errors.map((error) => (
+                  <FieldDescription key={String(error)}>{String(error)}</FieldDescription>
+                ))}
+              </Field>
+            )}
+          </form.Field>
+          <form.Field name="email">
+            {(field) => (
+              <Field data-invalid={field.state.meta.errors.length > 0 || undefined}>
+                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  onBlur={field.handleBlur}
+                  aria-invalid={field.state.meta.errors.length > 0 || undefined}
+                />
+                {field.state.meta.errors.map((error) => (
+                  <FieldDescription key={String(error)}>{String(error)}</FieldDescription>
+                ))}
+              </Field>
+            )}
+          </form.Field>
+        </div>
         <form.Field name="password">
           {(field) => (
             <Field data-invalid={field.state.meta.errors.length > 0 || undefined}>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
+              <div className="flex items-center">
+                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <span className="text-muted-foreground ml-auto text-sm">Min. 8 characters</span>
+              </div>
               <Input
                 id="password"
                 type="password"
@@ -110,13 +113,9 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
                 onBlur={field.handleBlur}
                 aria-invalid={field.state.meta.errors.length > 0 || undefined}
               />
-              {field.state.meta.errors.length > 0 ? (
-                field.state.meta.errors.map((error) => (
-                  <FieldDescription key={String(error)}>{String(error)}</FieldDescription>
-                ))
-              ) : (
-                <FieldDescription>Must be at least 8 characters long.</FieldDescription>
-              )}
+              {field.state.meta.errors.map((error) => (
+                <FieldDescription key={String(error)}>{String(error)}</FieldDescription>
+              ))}
             </Field>
           )}
         </form.Field>

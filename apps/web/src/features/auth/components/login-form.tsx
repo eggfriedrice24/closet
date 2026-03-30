@@ -56,7 +56,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
       <FieldGroup>
         <div className="flex flex-col items-center gap-2 text-center">
           <h1 className="text-2xl font-bold">Welcome back</h1>
-          <p className="text-muted-foreground text-balance">Sign in to Closet Command</p>
+          <p className="text-muted-foreground text-balance">Sign in to Closet</p>
         </div>
         <form.Field name="email">
           {(field) => (
