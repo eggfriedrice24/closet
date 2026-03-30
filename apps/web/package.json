@@ -20,6 +20,7 @@
     "@tanstack/react-form": "^1.28.5",
     "@tanstack/react-query": "catalog:",
     "@tanstack/react-router": "^1.168.8",
+    "@uploadthing/react": "^7.3.3",
     "@workspace/api-client": "workspace:*",
     "@workspace/env": "workspace:*",
     "@workspace/shared": "workspace:*",
