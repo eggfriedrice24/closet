@@ -2,6 +2,7 @@
   "name": "mobile",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "main": "src/app.tsx",
   "scripts": {
     "dev": "expo start",
@@ -16,10 +17,11 @@
   "dependencies": {
     "expo": "^55.0.9",
     "expo-status-bar": "^55.0.4",
-    "react": "^19.2.4",
+    "react": "catalog:",
     "react-native": "^0.84.1"
   },
   "devDependencies": {
-    "@types/react": "^19.2.14"
+    "@types/react": "catalog:",
+    "typescript": "catalog:"
   }
 }

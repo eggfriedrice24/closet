@@ -14,27 +14,27 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hugeicons/core-free-icons": "^4.0.0",
-    "@hugeicons/react": "^1.1.6",
+    "@hugeicons/core-free-icons": "catalog:",
+    "@hugeicons/react": "catalog:",
     "@tanstack/pacer": "^0.20.0",
     "@tanstack/react-form": "^1.28.5",
-    "@tanstack/react-query": "^5.95.2",
+    "@tanstack/react-query": "catalog:",
     "@tanstack/react-router": "^1.168.8",
     "@workspace/api-client": "workspace:*",
     "@workspace/env": "workspace:*",
     "@workspace/shared": "workspace:*",
     "@workspace/ui": "workspace:*",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/vite": "catalog:",
     "@tanstack/router-vite-plugin": "^1.166.24",
-    "@types/node": "^25.1.0",
-    "@types/react": "^19.2.10",
-    "@types/react-dom": "^19.2.3",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "^5.1.1",
-    "typescript": "^5.9.3",
-    "vite": "^7.2.4"
+    "typescript": "catalog:",
+    "vite": "catalog:"
   }
 }

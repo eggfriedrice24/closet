@@ -1,6 +1,6 @@
 {
   "name": "@workspace/api-client",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "exports": {
@@ -15,15 +15,15 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.95.2",
+    "@tanstack/react-query": "catalog:",
     "@workspace/env": "workspace:*",
-    "better-auth": "^1.5.6",
-    "hono": "^4.12.9"
+    "better-auth": "catalog:",
+    "hono": "catalog:"
   },
   "devDependencies": {
-    "@types/react": "^19.2.14",
+    "@types/react": "catalog:",
     "server": "workspace:*",
-    "typescript": "^6.0.2"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "react": "^19.0.0"
