@@ -17,13 +17,17 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.80.0",
     "@hono/node-server": "^1.19.11",
+    "@hono/zod-validator": "^0.7.6",
     "@workspace/env": "workspace:*",
     "better-auth": "catalog:",
     "drizzle-orm": "^0.45.2",
     "drizzle-zod": "^0.8.3",
     "hono": "catalog:",
-    "postgres": "^3.4.8"
+    "postgres": "^3.4.8",
+    "uploadthing": "^7.7.4",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/node": "catalog:",
