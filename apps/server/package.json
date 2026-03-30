@@ -21,6 +21,7 @@
     "@workspace/env": "workspace:*",
     "better-auth": "catalog:",
     "drizzle-orm": "^0.45.2",
+    "drizzle-zod": "^0.8.3",
     "hono": "catalog:",
     "postgres": "^3.4.8"
   },
