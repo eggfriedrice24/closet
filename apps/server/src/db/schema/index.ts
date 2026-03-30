@@ -10,4 +10,15 @@ export type { InsertAccount, SelectAccount } from "./account";
 export { verification, insertVerificationSchema, selectVerificationSchema } from "./verification";
 export type { InsertVerification, SelectVerification } from "./verification";
 
-export { userRelations, sessionRelations, accountRelations } from "./relations";
+export { category, insertCategorySchema, selectCategorySchema } from "./category";
+export type { InsertCategory, SelectCategory } from "./category";
+
+export { wardrobeItem, insertWardrobeItemSchema, selectWardrobeItemSchema } from "./wardrobe-item";
+export type { InsertWardrobeItem, SelectWardrobeItem } from "./wardrobe-item";
+
+export {
+  userRelations,
+  sessionRelations,
+  accountRelations,
+  wardrobeItemRelations,
+} from "./relations";
