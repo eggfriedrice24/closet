@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedWardrobeRouteImport } from './routes/_authenticated/wardrobe'
 import { Route as AuthSignInRouteImport } from './routes/_auth/sign-in'
 import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 
@@ -26,6 +27,11 @@ const AuthRoute = AuthRouteImport.update({
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedWardrobeRoute = AuthenticatedWardrobeRouteImport.update({
+  id: '/wardrobe',
+  path: '/wardrobe',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthSignInRoute = AuthSignInRouteImport.update({
@@ -43,11 +49,13 @@ export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/register': typeof AuthRegisterRoute
   '/sign-in': typeof AuthSignInRoute
+  '/wardrobe': typeof AuthenticatedWardrobeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
   '/register': typeof AuthRegisterRoute
   '/sign-in': typeof AuthSignInRoute
+  '/wardrobe': typeof AuthenticatedWardrobeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -55,19 +63,21 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_auth/register': typeof AuthRegisterRoute
   '/_auth/sign-in': typeof AuthSignInRoute
+  '/_authenticated/wardrobe': typeof AuthenticatedWardrobeRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/register' | '/sign-in'
+  fullPaths: '/' | '/register' | '/sign-in' | '/wardrobe'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/register' | '/sign-in'
+  to: '/' | '/register' | '/sign-in' | '/wardrobe'
   id:
     | '__root__'
     | '/_auth'
     | '/_authenticated'
     | '/_auth/register'
     | '/_auth/sign-in'
+    | '/_authenticated/wardrobe'
     | '/_authenticated/'
   fileRoutesById: FileRoutesById
 }
@@ -97,6 +107,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/wardrobe': {
+      id: '/_authenticated/wardrobe'
+      path: '/wardrobe'
+      fullPath: '/wardrobe'
+      preLoaderRoute: typeof AuthenticatedWardrobeRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_auth/sign-in': {
@@ -129,10 +146,12 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedWardrobeRoute: typeof AuthenticatedWardrobeRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedWardrobeRoute: AuthenticatedWardrobeRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
 
